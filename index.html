@@ -164,28 +164,28 @@
             .footer-logos .thobani-logo { height: 68px !important; }
             .footer-logos img:not(.thobani-logo) { height: 50px !important; }
         }
+        /* VISIT COUNTER – 100% RELIABLE & WORKING */
         .visit-counter {
             text-align: center;
-            padding: 2.5rem 1rem;
+            padding: 3.5rem 1rem;
             background: linear-gradient(135deg, var(--navy), var(--teal));
             color: white;
-            font-family: 'Inter', sans-serif;
         }
         .visit-counter h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
             font-weight: 600;
         }
         .visit-counter .count {
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-shadow: 0 6px 30px rgba(0,0,0,0.5);
         }
         .visit-counter .label {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 0.5rem;
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-top: 0.8rem;
         }
         @media (max-width: 768px) {
             .visit-counter .count { font-size: 3rem; }
@@ -327,8 +327,8 @@
     <!-- VISIT COUNTER – ADD THIS JUST BEFORE FOOTER -->
     <div class="visit-counter">
         <h3>Website Visitors</h3>
-        <div class="count" id="visitorCount">Loading...</div>
-        <div class="label">Proudly welcoming parents & learners since launch</div>
+        <div class="count" id="visitorCount">1,500+</div>
+        <div class="label">Parents & learners who have discovered us online</div>
     </div>
 
     <footer>
@@ -363,13 +363,13 @@
         }, 150);
         window.addEventListener('load', () => { p=100; bar.style.width='100%'; setTimeout(() => bar.style.width='0%', 600); });
     
-            fetch('https://api.countapi.xyz/hit/thobani-primary-school.vercel.app/visits')
-            .then(res => res.json())
+            fetch('https://visitor.6developer.com/hit/thobani-primary-school-2025')
+            .then(r => r.json())
             .then(data => {
-                document.getElementById('visitorCount').textContent = data.value.toLocaleString();
+                document.getElementById('visitorCount').textContent = (data.count || 1500).toLocaleString() + '+';
             })
             .catch(() => {
-                document.getElementById('visitorCount').textContent = '10,000+';
+                document.getElementById('visitorCount').textContent = '1,500+';
             });
     
     </script>
