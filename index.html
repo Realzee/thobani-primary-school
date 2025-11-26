@@ -5,43 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thobani Primary School | Quality Education in Madadeni</title>
     <meta name="description" content="Thobani Primary School - A proud public school under the KwaZulu-Natal Department of Education.">
-    <!-- Stops favicon 404 error -->
-    <link rel="icon" href="img/logo.ico" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>School</text></svg>" type="image/svg+xml">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-
-        /* HERO SLIDER */
-.hero-slider {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    overflow: hidden;
-}
-.hero-slider .slide {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    background: rgba(0,48,63,0.4);
-}
-.hero-slider .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.hero-slider .slide.active {
-    opacity: 1;
-}
-#hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg,rgba(0,48,63,0.85),rgba(0,106,122,0.7));
-    z-index: 1;
-}
-.hero-content { position: relative; z-index: 2; }
-
         :root {
             --navy: #00303f;
             --teal: #006a7a;
@@ -61,7 +29,6 @@
         }
         h1,h2,h3,.section-title { font-family: 'Playfair Display', serif; color: var(--navy); }
 
-        /* Loading Progress Bar */
         #progress-bar {
             position: fixed; top: 0; left: 0; width: 0%; height: 5px;
             background: linear-gradient(to right, var(--teal), #00c9b1);
@@ -69,14 +36,13 @@
             box-shadow: 0 0 15px rgba(0,106,122,0.6);
         }
 
-        /* Header & Navigation */
         header {
             position: fixed; top: 0; left: 0; right: 0;
-            background: var(--navy); padding: 1rem 5%; z-index: 1000;
+            background: var(--navy); padding: 0.8rem 5%; z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,48,63,0.15);
             display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
         }
-        .logo img { height: 68px; }
+        .logo img { height: 52px; transition: all 0.3s; }
         .desktop-nav { display: flex; gap: 2.8rem; }
         .desktop-nav a { color: white; text-decoration: none; font-weight: 600; position: relative; }
         .desktop-nav a::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 3px; background: var(--teal); transition: width 0.4s; }
@@ -102,15 +68,28 @@
 
         @media (max-width: 992px) { .desktop-nav { display: none; } .hamburger { display: flex; } }
 
-        /* Hero Section */
+        /* HERO WITH SCROLLING IMAGES */
         #hero {
+            position: relative;
             height: 100vh; min-height: 680px;
-            background: linear-gradient(135deg,rgba(0,48,63,0.94),rgba(0,106,122,0.88)),
-                        url('https://images.unsplash.com/photo-1498243691581-b145660463ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            overflow: hidden;
             display: flex; align-items: center; text-align: center; color: white;
         }
-        .hero-content { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .hero-slider .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1.5s ease-in-out;
+        }
+        .hero-slider .slide img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .hero-slider .slide.active { opacity: 1; }
+        #hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg,rgba(0,48,63,0.85),rgba(0,106,122,0.7));
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 2rem; }
         .hero-content h1 { font-size: 4.8rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .hero-content p { font-size: 1.45rem; margin-bottom: 2.5rem; opacity: 0.96; }
         .btn { background: var(--teal); color: white; padding: 1.2rem 3rem; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 12px 35px rgba(0,106,122,0.45); transition: all 0.4s ease; }
@@ -147,16 +126,14 @@
         .contact-info { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto 2rem; }
         .contact-item { background: rgba(255,255,255,0.15); padding: 3rem; border-radius: 24px; text-align: center; backdrop-filter: blur(12px); }
 
-        .map-container {
-            max-width: 1200px; margin: 3rem auto; height: 520px; border-radius: 28px; overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,48,63,0.2);
-        }
+        .map-container { max-width: 1200px; margin: 3rem auto; height: 520px; border-radius: 28px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,48,63,0.2); }
         .map-container iframe { width: 100%; height: 100%; border: 0; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 5rem 5% 2rem; }
         .footer-logos { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 2rem 0; align-items: center; }
-        .footer-logos img { height: 80px; filter: brightness(0) invert(1); }
-        .footer-logos .thobani-logo { height: 100px; }
+        .footer-logos img { filter: brightness(0) invert(1); }
+        .footer-logos .thobani-logo { height: 78px; }
+        .footer-logos img:not(.thobani-logo) { height: 58px; }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; background: #25d366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 12px 35px rgba(37,211,102,0.5); z-index: 998; transition: all 0.4s ease; }
         .whatsapp-float:hover { transform: scale(1.25); }
@@ -165,8 +142,9 @@
             .hero-content h1 { font-size: 3.4rem; }
             .section-title { font-size: 2.6rem; }
             .map-container { height: 400px; }
-            .footer-logos img { height: 60px; }
-            .footer-logos .thobani-logo { height: 80px; }
+            header .logo img { height: 46px !important; }
+            .footer-logos .thobani-logo { height: 65px !important; }
+            .footer-logos img:not(.thobani-logo) { height: 50px !important; }
         }
     </style>
 </head>
@@ -174,7 +152,6 @@
 
     <div id="progress-bar"></div>
 
-    <!-- Header -->
     <header>
         <div class="logo">
             <img src="img/logo-transp-white.png" alt="Thobani Primary School">
@@ -193,7 +170,6 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
@@ -206,50 +182,37 @@
         </ul>
     </div>
 
-    <!-- HERO WITH AUTO-SCROLLING IMAGES -->
-<section id="hero">
-    <div class="hero-slider">
-        <div class="slide active">
-            <img src="img/logo-transp-white.png" alt="Learners smiling">
+    <!-- HERO WITH 3 SCROLLING IMAGES -->
+    <section id="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="img/logo-transp-white.png" alt="Happy learners">
+            </div>
+            <div class="slide">
+                <img src="img/dbe.png" alt="Classroom learning">
+            </div>
+            <div class="slide">
+                <img src="img/kzn-transp.png" alt="School activities">
+            </div>
         </div>
-        <div class="slide">
-            <img src="img/kzn-transp.png" alt="Classroom learning">
-        </div>
-        <div class="slide">
-            <img src="img/dbe.png" alt="School sports and activities">
-        </div>
-    </div>
 
-    <div class="hero-content">
-        <h1>Thobani Primary School</h1>
-        <p>Quality Education • Building Bright Futures in Madadeni</p>
-        <a href="#admission" class="btn">Apply for 2026</a>
-    </div>
-</section>
-
-    <!-- About -->
-    <section id="about">
-        <h2 class="section-title">Why Parents Choose Thobani</h2>
-        <div class="grid grid-3">
-            <div class="card">
-                <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
-                <h3>Academic Excellence</h3>
-                <p>Qualified teachers, strong CAPS results, and individual attention for every learner.</p>
-            </div>
-            <div class="card">
-                <div class="icon-circle"><i class="fas fa-futbol"></i></div>
-                <h3>Holistic Growth</h3>
-                <p>Sports, culture, leadership and life values for well-rounded development.</p>
-            </div>
-            <div class="card">
-                <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
-                <h3>Safe & Caring</h3>
-                <p>A secure, disciplined environment where every child is valued and supported.</p>
-            </div>
+        <div class="hero-content">
+            <h1>Thobani Primary School</h1>
+            <p>Quality Education • Building Bright Futures in Madadeni</p>
+            <a href="#admission" class="btn">Apply for 2026</a>
         </div>
     </section>
 
-    <!-- Academics -->
+    <!-- All other sections remain unchanged -->
+    <section id="about">
+        <h2 class="section-title">Why Parents Choose Thobani</h2>
+        <div class="grid grid-3">
+            <div class="card"><div class="icon-circle"><i class="fas fa-graduation-cap"></i></div><h3>Academic Excellence</h3><p>Qualified teachers, strong CAPS results, and individual attention for every learner.</p></div>
+            <div class="card"><div class="icon-circle"><i class="fas fa-futbol"></i></div><h3>Holistic Growth</h3><p>Sports, culture, leadership and life values for well-rounded development.</p></div>
+            <div class="card"><div class="icon-circle"><i class="fas fa-shield-alt"></i></div><h3>Safe & Caring</h3><p>A secure, disciplined environment where every child is valued and supported.</p></div>
+        </div>
+    </section>
+
     <section id="academics" style="background:var(--gray);">
         <h2 class="section-title">Our Academic Programme</h2>
         <div class="grid grid-3">
@@ -259,20 +222,18 @@
         </div>
     </section>
 
-    <!-- Gallery -->
     <section id="gallery">
         <h2 class="section-title">School Life</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="img/1.jpg" alt="Learners in class"></div>
-            <div class="gallery-item"><img src="img/2.jpg" alt="Sports day"></div>
-            <div class="gallery-item"><img src="img/3.png" alt="School assembly"></div>
-            <div class="gallery-item"><img src="img/4.jpg" alt="Cultural event"></div>
-            <div class="gallery-item"><img src="img/5.jpg" alt="Prize giving"></div>
-            <div class="gallery-item"><img src="img/6.jpg" alt="Grade 7 farewell"></div>
+            <div class="gallery-item"><img src="img/1.jpg" alt="Learners"></div>
+            <div class="gallery-item"><img src="img/2.jpg" alt="Sports"></div>
+            <div class="gallery-item"><img src="img/3.png" alt="Assembly"></div>
+            <div class="gallery-item"><img src="img/4.jpg" alt="Culture"></div>
+            <div class="gallery-item"><img src="img/5.jpg" alt="Events"></div>
+            <div class="gallery-item"><img src="img/6.jpg" alt="Graduation"></div>
         </div>
     </section>
 
-    <!-- Calendar -->
     <section id="calendar" style="background:var(--teal-light);">
         <h2 class="section-title">School Calendar 2026</h2>
         <div class="calendar-grid">
@@ -283,7 +244,6 @@
         </div>
     </section>
 
-    <!-- Admission -->
     <section id="admission">
         <h2 class="section-title">Online Admission Enquiry</h2>
         <div class="form-container">
@@ -306,41 +266,25 @@
         </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
         <h2 class="section-title">Visit Us</h2>
         <div class="contact-info">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt" style="font-size:3rem;margin-bottom:1.5rem;"></i>
-                <h3>Address</h3>
-                <p>9284 Section 5<br>Madadeni<br>Newcastle, 2951<br>KwaZulu-Natal</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone" style="font-size:3rem;margin-bottom:1.5rem;"></i>
-                <h3>Phone</h3>
-                <p>+27 84 618 4317</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope" style="font-size:3rem;margin-bottom:1.5rem;"></i>
-                <h3>Email</h3>
-                <p>thokozilemakhubu5@gmail.com</p>
-            </div>
+            <div class="contact-item"><i class="fas fa-map-marker-alt" style="font-size:3rem;margin-bottom:1.5rem;"></i><h3>Address</h3><p>9284 Section 5<br>Madadeni<br>Newcastle, 2951<br>KwaZulu-Natal</p></div>
+            <div class="contact-item"><i class="fas fa-phone" style="font-size:3rem;margin-bottom:1.5rem;"></i><h3>Phone</h3><p>+27 84 618 4317</p></div>
+            <div class="contact-item"><i class="fas fa-envelope" style="font-size:3rem;margin-bottom:1.5rem;"></i><h3>Email</h3><p>thokozilemakhubu5@gmail.com</p></div>
         </div>
 
-        <!-- Working Google Map - No API key needed -->
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.395975945315!2d30.0374639!3d-27.74946898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e604e8b6b6b6b6b%3A0x9c8f8f8f8f8f8f8f!2sThobani%20Primary%20School!5e0!3m2!1sen!2sza!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <p style="text-align:center; margin-top:2rem;">
-            <a href="https://maps.google.com/maps?q=Thobani+Primary+School,+Madadeni" target="_blank" 
-               style="background:var(--teal); color:white; padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:600;">
+            <a href="https://maps.google.com/maps?q=Thobani+Primary+School,+Madadeni" target="_blank" style="background:var(--teal); color:white; padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:600;">
                Open in Google Maps
             </a>
         </p>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-logos">
             <img src="img/logo-transp-white.png" alt="Thobani Primary School" class="thobani-logo">
@@ -350,12 +294,10 @@
         <p>A proud public school under the KwaZulu-Natal Department of Education<br>© 2025 Thobani Primary School. All rights reserved.</p>
     </footer>
 
-    <!-- WhatsApp Float -->
     <a href="https://wa.me/27846184317?text=Hello%20Thobani%20Primary%20School!" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Scripts -->
     <script>
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
@@ -366,7 +308,18 @@
             if(document.getElementById('mobileMenu').classList.contains('active')) toggleMenu();
         }));
 
-        // Loading Progress Bar
+        // Hero slider
+        const slides = document.querySelectorAll('.hero-slider .slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+        document.addEventListener('DOMContentLoaded', () => slides[0].classList.add('active'));
+
+        // Loading bar
         let p = 0;
         const bar = document.getElementById('progress-bar');
         const int = setInterval(() => {
@@ -375,26 +328,5 @@
         }, 150);
         window.addEventListener('load', () => { p=100; bar.style.width='100%'; setTimeout(() => bar.style.width='0%', 600); });
     </script>
-
-    <script>
-    // Auto-scrolling hero slider
-    const slides = document.querySelectorAll('.hero-slider .slide');
-    let currentSlide = 0;
-
-    function nextSlide() {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }
-
-    // Change image every 5 seconds
-    setInterval(nextSlide, 5000);
-
-    // Ensure first slide is active on load
-    document.addEventListener('DOMContentLoaded', () => {
-        slides[0].classList.add('active');
-    });
-</script>
-
 </body>
 </html>
