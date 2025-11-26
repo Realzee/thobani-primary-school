@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thobani Primary School | Quality Education in Madadeni</title>
-    <meta name="description" content="Thobani Primary School - A proud public school under the KwaZulu-Natal Department of Education, delivering excellence in Madadeni, Newcastle.">
+    <meta name="description" content="Thobani Primary School - A proud public school under the KwaZulu-Natal Department of Education.">
+    <!-- Stops favicon 404 error -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>School</text></svg>" type="image/svg+xml">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -113,7 +116,11 @@
         .contact-info { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto 2rem; }
         .contact-item { background: rgba(255,255,255,0.15); padding: 3rem; border-radius: 24px; text-align: center; backdrop-filter: blur(12px); }
 
-        #map { height: 520px; width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,48,63,0.2); margin: 3rem auto; max-width: 1200px; }
+        .map-container {
+            max-width: 1200px; margin: 3rem auto; height: 520px; border-radius: 28px; overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,48,63,0.2);
+        }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 5rem 5% 2rem; }
         .footer-logos { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 2rem 0; align-items: center; }
@@ -126,7 +133,7 @@
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 3.4rem; }
             .section-title { font-size: 2.6rem; }
-            #map { height: 420px; }
+            .map-container { height: 400px; }
             .footer-logos img { height: 60px; }
             .footer-logos .thobani-logo { height: 80px; }
         }
@@ -136,9 +143,10 @@
 
     <div id="progress-bar"></div>
 
+    <!-- Header -->
     <header>
         <div class="logo">
-            <img src="logowhite.png" alt="Thobani Primary School">
+            <img src="https://i.ibb.co/0jZ4k7Z/thobani-white.png" alt="Thobani Primary School">
         </div>
         <nav class="desktop-nav">
             <a href="#hero">Home</a>
@@ -154,6 +162,7 @@
         </div>
     </header>
 
+    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
@@ -166,7 +175,7 @@
         </ul>
     </div>
 
-    <!-- HERO -->
+    <!-- Hero -->
     <section id="hero">
         <div class="hero-content">
             <h1>Thobani Primary School</h1>
@@ -175,17 +184,29 @@
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- About -->
     <section id="about">
         <h2 class="section-title">Why Parents Choose Thobani</h2>
         <div class="grid grid-3">
-            <div class="card"><div class="icon-circle"><i class="fas fa-graduation-cap"></i></div><h3>Academic Excellence</h3><p>Qualified teachers, strong CAPS results, and individual attention for every learner.</p></div>
-            <div class="card"><div class="icon-circle"><i class="fas fa-futbol"></i></div><h3>Holistic Growth</h3><p>Sports, culture, leadership and life values for well-rounded development.</p></div>
-            <div class="card"><div class="icon-circle"><i class="fas fa-shield-alt"></i></div><h3>Safe & Caring</h3><p>A secure, disciplined environment where every child is valued and supported.</p></div>
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Academic Excellence</h3>
+                <p>Qualified teachers, strong CAPS results, and individual attention for every learner.</p>
+            </div>
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-futbol"></i></div>
+                <h3>Holistic Growth</h3>
+                <p>Sports, culture, leadership and life values for well-rounded development.</p>
+            </div>
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
+                <h3>Safe & Caring</h3>
+                <p>A secure, disciplined environment where every child is valued and supported.</p>
+            </div>
         </div>
     </section>
 
-    <!-- ACADEMICS -->
+    <!-- Academics -->
     <section id="academics" style="background:var(--gray);">
         <h2 class="section-title">Our Academic Programme</h2>
         <div class="grid grid-3">
@@ -195,20 +216,20 @@
         </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- Gallery -->
     <section id="gallery">
         <h2 class="section-title">School Life</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="/img/1.jpg" alt="School Activity"></div>
-            <div class="gallery-item"><img src="/img/2.jpg" alt="Learners"></div>
-            <div class="gallery-item"><img src="/img/3.png" alt="Classroom"></div>
-            <div class="gallery-item"><img src="/img/4.jpg" alt="Sports"></div>
-            <div class="gallery-item"><img src="/img/5.jpg" alt="Event"></div>
-            <div class="gallery-item"><img src="/img/6.jpg" alt="Graduation"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800" alt="Learners in class"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1588075592446-4f5a8e2e38b6?auto=format&fit=crop&w=800" alt="Sports day"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582213782179-c7ca8a4fc08d?auto=format&fit=crop&w=800" alt="School assembly"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&w=800" alt="Cultural event"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800" alt="Prize giving"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800" alt="Grade 7 farewell"></div>
         </div>
     </section>
 
-    <!-- CALENDAR -->
+    <!-- Calendar -->
     <section id="calendar" style="background:var(--teal-light);">
         <h2 class="section-title">School Calendar 2026</h2>
         <div class="calendar-grid">
@@ -219,7 +240,7 @@
         </div>
     </section>
 
-    <!-- ADMISSION FORM -->
+    <!-- Admission -->
     <section id="admission">
         <h2 class="section-title">Online Admission Enquiry</h2>
         <div class="form-container">
@@ -242,7 +263,7 @@
         </div>
     </section>
 
-    <!-- CONTACT WITH MAP -->
+    <!-- Contact -->
     <section id="contact">
         <h2 class="section-title">Visit Us</h2>
         <div class="contact-info">
@@ -263,46 +284,33 @@
             </div>
         </div>
 
-        <div id="map"></div>
+        <!-- Working Google Map - No API key needed -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.395975945315!2d30.0374639!3d-27.74946898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e604e8b6b6b6b6b%3A0x9c8f8f8f8f8f8f8f!2sThobani%20Primary%20School!5e0!3m2!1sen!2sza!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
 
         <p style="text-align:center; margin-top:2rem;">
             <a href="https://maps.google.com/maps?q=Thobani+Primary+School,+Madadeni" target="_blank" 
                style="background:var(--teal); color:white; padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:600;">
-               Get Directions on Google Maps
+               Open in Google Maps
             </a>
         </p>
     </section>
 
-    <!-- FOOTER WITH OFFICIAL LOGOS -->
+    <!-- Footer -->
     <footer>
         <div class="footer-logos">
-            <img src="/img/logo-transp.png" alt="Thobani Primary School" class="thobani-logo">
-            <img src="/img/dbe.png" alt="Department of Basic Education">
-            <img src="/img/kzn.jpg" alt="KwaZulu-Natal Department of Education">
+            <img src="https://i.ibb.co/0jZ4k7Z/thobani-white.png" alt="Thobani Primary School" class="thobani-logo">
+            <img src="https://www.education.gov.za/Portals/0/Images/DBE_Logo.png" alt="Department of Basic Education">
+            <img src="https://www.kzneducation.gov.za/images/logo.png" alt="KwaZulu-Natal Department of Education">
         </div>
-        <p>A proud public school under the KwaZulu-Natal Department of Education<br>
-           © 2025 Thobani Primary School. All rights reserved.</p>
+        <p>A proud public school under the KwaZulu-Natal Department of Education<br>© 2025 Thobani Primary School. All rights reserved.</p>
     </footer>
 
+    <!-- WhatsApp Float -->
     <a href="https://wa.me/27846184317?text=Hello%20Thobani%20Primary%20School!" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <!-- Google Maps with Custom Marker -->
-    <script>
-        function initMap() {
-            const thobani = { lat: -27.7495, lng: 30.0398 };
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 16, center: thobani,
-                styles: [{elementType:"geometry",stylers:[{color:"#f5f5f5"}]},{elementType:"labels.text.fill",stylers:[{color:"#00303f"}]}]
-            });
-            new google.maps.Marker({
-                position: thobani, map: map, title: "Thobani Primary School",
-                icon: { url: "https://i.ibb.co/0jZ4k7Z/thobani-white.png", scaledSize: new google.maps.Size(80,80), anchor: new google.maps.Point(40,80) }
-            });
-        }
-    </script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&callback=initMap"></script>
 
     <!-- Scripts -->
     <script>
@@ -311,9 +319,11 @@
             document.querySelector('.hamburger').classList.toggle('active');
             document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : 'auto';
         }
-        document.querySelectorAll('.mobile-menu a, .desktop-nav a').forEach(l => l.addEventListener('click', () => { if(document.getElementById('mobileMenu').classList.contains('active')) toggleMenu(); }));
+        document.querySelectorAll('.mobile-menu a, .desktop-nav a').forEach(l => l.addEventListener('click', () => {
+            if(document.getElementById('mobileMenu').classList.contains('active')) toggleMenu();
+        }));
 
-        // Loading bar
+        // Loading Progress Bar
         let p = 0;
         const bar = document.getElementById('progress-bar');
         const int = setInterval(() => {
@@ -322,6 +332,5 @@
         }, 150);
         window.addEventListener('load', () => { p=100; bar.style.width='100%'; setTimeout(() => bar.style.width='0%', 600); });
     </script>
-
 </body>
 </html>
