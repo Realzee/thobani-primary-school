@@ -1,1 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thobani Primary School | Quality Education in Madadeni</title>
+    <meta name="description" content="Thobani Primary School - A proud public school under the KwaZulu-Natal Department of Education, delivering excellence in Madadeni, Newcastle.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #00303f;
+            --teal: #006a7a;
+            --teal-light: #e6f2f4;
+            --white: #ffffff;
+            --offwhite: #f8fbfc;
+            --gray: #f1f5f9;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--offwhite);
+            color: #1e293b;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        h1,h2,h3,.section-title { font-family: 'Playfair Display', serif; color: var(--navy); }
 
+        /* Loading Progress Bar */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; width: 0%; height: 5px;
+            background: linear-gradient(to right, var(--teal), #00c9b1);
+            z-index: 9999; transition: width 0.2s ease;
+            box-shadow: 0 0 15px rgba(0,106,122,0.6);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: var(--navy); padding: 1rem 5%; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,48,63,0.15);
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+        }
+        .logo img { height: 68px; }
+        .desktop-nav { display: flex; gap: 2.8rem; }
+        .desktop-nav a { color: white; text-decoration: none; font-weight: 600; position: relative; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 3px; background: var(--teal); transition: width 0.4s; }
+        .desktop-nav a:hover { color: var(--teal); }
+        .desktop-nav a:hover::after { width: 100%; }
+
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; }
+        .hamburger span { width: 32px; height: 3px; background: white; border-radius: 3px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(10px,10px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(10px,-10px); }
+
+        .mobile-menu {
+            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+            background: rgba(0,48,63,0.98); backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center;
+            transition: right 0.5s cubic-bezier(0.77,0,0.18,1); z-index: 999;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu ul { list-style: none; text-align: center; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 2.4rem; font-weight: 600; display: block; padding: 1.4rem; transition: all 0.3s; }
+        .mobile-menu a:hover { color: var(--teal); transform: translateX(15px); }
+
+        @media (max-width: 992px) { .desktop-nav { display: none; } .hamburger { display: flex; } }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh; min-height: 680px;
+            background: linear-gradient(135deg,rgba(0,48,63,0.94),rgba(0,106,122,0.88)),
+                        url('https://images.unsplash.com/photo-1498243691581-b145660463ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; text-align: center; color: white;
+        }
+        .hero-content { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .hero-content h1 { font-size: 4.8rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.45rem; margin-bottom: 2.5rem; opacity: 0.96; }
+        .btn { background: var(--teal); color: white; padding: 1.2rem 3rem; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 12px 35px rgba(0,106,122,0.45); transition: all 0.4s ease; }
+        .btn:hover { background: white; color: var(--navy); transform: translateY(-6px); }
+
+        section { padding: 130px 5%; }
+        .section-title { text-align: center; font-size: 3.2rem; margin-bottom: 5rem; position: relative; }
+        .section-title::after { content: ''; width: 120px; height: 5px; background: linear-gradient(to right,var(--navy),var(--teal)); display: block; margin: 1.5rem auto; border-radius: 3px; }
+
+        .grid { display: grid; gap: 3rem; max-width: 1300px; margin: 0 auto; }
+        .grid-3 { grid-template-columns: repeat(auto-fit,minmax(340px,1fr)); }
+        .card { background: white; padding: 3rem; border-radius: 24px; box-shadow: 0 15px 45px rgba(0,48,63,0.1); text-align: center; transition: all 0.5s ease; border: 1px solid #e2e8f0; }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,48,63,0.18); }
+        .icon-circle { width: 100px; height: 100px; background: linear-gradient(135deg,var(--navy),var(--teal)); border-radius: 50%; margin: 0 auto 1.8rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .gallery-item { border-radius: 24px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,48,63,0.12); transition: transform 0.5s ease; }
+        .gallery-item:hover { transform: scale(1.06); }
+        .gallery-item img { width: 100%; height: 300px; object-fit: cover; }
+
+        .calendar-grid { display: grid; gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .term-card { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 45px rgba(0,48,63,0.1); border-left: 8px solid var(--teal); }
+        .term-header { background: linear-gradient(to right,var(--navy),var(--teal)); color: white; padding: 2rem; text-align: center; font-size: 1.8rem; font-weight: 700; }
+        .term-dates { background: var(--teal-light); color: var(--navy); padding: 1.2rem; text-align: center; font-weight: 700; font-size: 1.2rem; }
+        .term-events { padding: 2.2rem; line-height: 2; color: #444; }
+
+        .form-container { max-width: 900px; margin: 0 auto; background: white; padding: 4rem; border-radius: 28px; box-shadow: 0 25px 60px rgba(0,48,63,0.15); }
+        input, select, textarea { width: 100%; padding: 1.1rem 1.4rem; border: 2px solid #e2e8f0; border-radius: 14px; font-size: 1.05rem; margin-bottom: 1.6rem; transition: all 0.3s ease; }
+        input:focus, select:focus, textarea:focus { border-color: var(--teal); outline: none; box-shadow: 0 0 0 4px rgba(0,106,122,0.1); }
+        .submit-btn { background: var(--navy); color: white; padding: 1.1rem 3.5rem; border: none; border-radius: 50px; font-size: 1.15rem; cursor: pointer; transition: all 0.4s ease; font-weight: 600; }
+        .submit-btn:hover { background: var(--teal); transform: translateY(-4px); }
+
+        #contact { background: linear-gradient(135deg,var(--navy),var(--teal)); color: white; }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto 2rem; }
+        .contact-item { background: rgba(255,255,255,0.15); padding: 3rem; border-radius: 24px; text-align: center; backdrop-filter: blur(12px); }
+
+        #map { height: 520px; width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,48,63,0.2); margin: 3rem auto; max-width: 1200px; }
+
+        footer { background: var(--navy); color: white; text-align: center; padding: 5rem 5% 2rem; }
+        .footer-logos { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 2rem 0; align-items: center; }
+        .footer-logos img { height: 80px; filter: brightness(0) invert(1); }
+        .footer-logos .thobani-logo { height: 100px; }
+
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; background: #25d366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 12px 35px rgba(37,211,102,0.5); z-index: 998; transition: all 0.4s ease; }
+        .whatsapp-float:hover { transform: scale(1.25); }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3.4rem; }
+            .section-title { font-size: 2.6rem; }
+            #map { height: 420px; }
+            .footer-logos img { height: 60px; }
+            .footer-logos .thobani-logo { height: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.ibb.co/0jZ4k7Z/thobani-white.png" alt="Thobani Primary School">
+        </div>
+        <nav class="desktop-nav">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#academics">Academics</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#calendar">Calendar</a>
+            <a href="#admission">Admissions</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#academics" onclick="toggleMenu()">Academics</a></li>
+            <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+            <li><a href="#calendar" onclick="toggleMenu()">Calendar</a></li>
+            <li><a href="#admission" onclick="toggleMenu()">Admissions</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Thobani Primary School</h1>
+            <p>Quality Education • Building Bright Futures in Madadeni</p>
+            <a href="#admission" class="btn">Apply for 2026</a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2 class="section-title">Why Parents Choose Thobani</h2>
+        <div class="grid grid-3">
+            <div class="card"><div class="icon-circle"><i class="fas fa-graduation-cap"></i></div><h3>Academic Excellence</h3><p>Qualified teachers, strong CAPS results, and individual attention for every learner.</p></div>
+            <div class="card"><div class="icon-circle"><i class="fas fa-futbol"></i></div><h3>Holistic Growth</h3><p>Sports, culture, leadership and life values for well-rounded development.</p></div>
+            <div class="card"><div class="icon-circle"><i class="fas fa-shield-alt"></i></div><h3>Safe & Caring</h3><p>A secure, disciplined environment where every child is valued and supported.</p></div>
+        </div>
+    </section>
+
+    <!-- ACADEMICS -->
+    <section id="academics" style="background:var(--gray);">
+        <h2 class="section-title">Our Academic Programme</h2>
+        <div class="grid grid-3">
+            <div class="card"><h3>Foundation Phase (Gr R–3)</h3><p>Play-based learning, reading & numeracy foundations.</p></div>
+            <div class="card"><h3>Intermediate Phase (Gr 4–7)</h3><p>Critical thinking and high school preparation.</p></div>
+            <div class="card"><h3>Extra-Curricular</h3><p>Soccer, netball, choir, environmental club and more.</p></div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <h2 class="section-title">School Life</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800" alt="School Activity"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1588075592446-4f5a8e2e38b6?auto=format&fit=crop&w=800" alt="Learners"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582213782179-c7ca8a4fc08d?auto=format&fit=crop&w=800" alt="Classroom"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&w=800" alt="Sports"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800" alt="Event"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800" alt="Graduation"></div>
+        </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section id="calendar" style="background:var(--teal-light);">
+        <h2 class="section-title">School Calendar 2026</h2>
+        <div class="calendar-grid">
+            <div class="term-card"><div class="term-header">Term 1</div><div class="term-dates">14 Jan – 27 Mar</div><div class="term-events">• New learners orientation<br>• Sports Day (14 Mar)<br>• Human Rights Day (21 Mar)</div></div>
+            <div class="term-card"><div class="term-header">Term 2</div><div class="term-dates">13 Apr – 26 Jun</div><div class="term-events">• Freedom Day • Workers’ Day • Youth Day<br>• Mid-year exams</div></div>
+            <div class="term-card"><div class="term-header">Term 3</div><div class="term-dates">20 Jul – 30 Sep</div><div class="term-events">• Women’s Day • Heritage Day<br>• Grade 7 Valediction</div></div>
+            <div class="term-card"><div class="term-header">Term 4</div><div class="term-dates">12 Oct – 11 Dec</div><div class="term-events">• Final exams<br>• Year-end concert & prizes<br>• School closes</div></div>
+        </div>
+    </section>
+
+    <!-- ADMISSION FORM -->
+    <section id="admission">
+        <h2 class="section-title">Online Admission Enquiry</h2>
+        <div class="form-container">
+            <form action="https://formsubmit.co/thokozilemakhubu5@gmail.com" method="POST">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.8rem;">
+                    <input type="text" name="Child Name" placeholder="Child's Full Name *" required>
+                    <select name="Grade" required><option value="">Grade Applying For *</option><option>Grade R</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option></select>
+                    <input type="text" name="Parent Name" placeholder="Parent/Guardian Name *" required>
+                    <input type="tel" name="Phone" placeholder="Phone Number *" required>
+                </div>
+                <input type="email" name="Email" placeholder="Email Address">
+                <textarea name="Message" rows="5" placeholder="Message / Special Requirements"></textarea>
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_next" value="#admission">
+                <input type="hidden" name="_subject" value="New Admission Enquiry - Thobani">
+                <div style="text-align:center; margin-top:1rem;">
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTACT WITH MAP -->
+    <section id="contact">
+        <h2 class="section-title">Visit Us</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt" style="font-size:3rem;margin-bottom:1.5rem;"></i>
+                <h3>Address</h3>
+                <p>9284 Section 5<br>Madadeni<br>Newcastle, 2951<br>KwaZulu-Natal</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone" style="font-size:3rem;margin-bottom:1.5rem;"></i>
+                <h3>Phone</h3>
+                <p>+27 84 618 4317</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope" style="font-size:3rem;margin-bottom:1.5rem;"></i>
+                <h3>Email</h3>
+                <p>thokozilemakhubu5@gmail.com</p>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <p style="text-align:center; margin-top:2rem;">
+            <a href="https://maps.google.com/maps?q=Thobani+Primary+School,+Madadeni" target="_blank" 
+               style="background:var(--teal); color:white; padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:600;">
+               Get Directions on Google Maps
+            </a>
+        </p>
+    </section>
+
+    <!-- FOOTER WITH OFFICIAL LOGOS -->
+    <footer>
+        <div class="footer-logos">
+            <img src="https://i.ibb.co/0jZ4k7Z/thobani-white.png" alt="Thobani Primary School" class="thobani-logo">
+            <img src="https://www.education.gov.za/Portals/0/Images/DBE_Logo.png?ver=2023-06-01-092832-000" alt="Department of Basic Education">
+            <img src="https://www.kzneducation.gov.za/images/logo.png" alt="KwaZulu-Natal Department of Education">
+        </div>
+        <p>A proud public school under the KwaZulu-Natal Department of Education<br>
+           © 2025 Thobani Primary School. All rights reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/27846184317?text=Hello%20Thobani%20Primary%20School!" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Google Maps with Custom Marker -->
+    <script>
+        function initMap() {
+            const thobani = { lat: -27.7495, lng: 30.0398 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 16, center: thobani,
+                styles: [{elementType:"geometry",stylers:[{color:"#f5f5f5"}]},{elementType:"labels.text.fill",stylers:[{color:"#00303f"}]}]
+            });
+            new google.maps.Marker({
+                position: thobani, map: map, title: "Thobani Primary School",
+                icon: { url: "https://i.ibb.co/0jZ4k7Z/thobani-white.png", scaledSize: new google.maps.Size(80,80), anchor: new google.maps.Point(40,80) }
+            });
+        }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&callback=initMap"></script>
+
+    <!-- Scripts -->
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : 'auto';
+        }
+        document.querySelectorAll('.mobile-menu a, .desktop-nav a').forEach(l => l.addEventListener('click', () => { if(document.getElementById('mobileMenu').classList.contains('active')) toggleMenu(); }));
+
+        // Loading bar
+        let p = 0;
+        const bar = document.getElementById('progress-bar');
+        const int = setInterval(() => {
+            if(p >= 100){ clearInterval(int); setTimeout(() => bar.style.width='0%', 300); }
+            else { p += Math.random()*15; if(p>95) p=95; bar.style.width = p + '%'; }
+        }, 150);
+        window.addEventListener('load', () => { p=100; bar.style.width='100%'; setTimeout(() => bar.style.width='0%', 600); });
+    </script>
+
+</body>
+</html>
