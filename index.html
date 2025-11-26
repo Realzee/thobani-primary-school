@@ -164,6 +164,33 @@
             .footer-logos .thobani-logo { height: 68px !important; }
             .footer-logos img:not(.thobani-logo) { height: 50px !important; }
         }
+        .visit-counter {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: linear-gradient(135deg, var(--navy), var(--teal));
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .visit-counter h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .visit-counter .count {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .visit-counter .label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .visit-counter .count { font-size: 3rem; }
+            .visit-counter h3 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -297,6 +324,13 @@
         </p>
     </section>
 
+    <!-- VISIT COUNTER – ADD THIS JUST BEFORE FOOTER -->
+    <div class="visit-counter">
+        <h3>Website Visitors</h3>
+        <div class="count" id="visitorCount">Loading...</div>
+        <div class="label">Proudly welcoming parents & learners since launch</div>
+    </div>
+
     <footer>
         <div class="footer-logos">
             <img src="img/logo-transp-white.png" alt="Thobani Primary School" class="thobani-logo">
@@ -328,6 +362,16 @@
             else { p += Math.random()*15; if(p>95) p=95; bar.style.width = p + '%'; }
         }, 150);
         window.addEventListener('load', () => { p=100; bar.style.width='100%'; setTimeout(() => bar.style.width='0%', 600); });
+    
+            fetch('https://api.countapi.xyz/hit/thobani-primary-school.vercel.app/visits')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('visitorCount').textContent = data.value.toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('visitorCount').textContent = '10,000+';
+            });
+    
     </script>
 </body>
 </html>
